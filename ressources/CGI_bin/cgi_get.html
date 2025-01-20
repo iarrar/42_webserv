@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire d'information</title>
+    <script>
+        function validateForm() {
+            var form = document.getElementById('infoForm');
+            var nom = form.nom.value;
+            var prenom = form.prenom.value;
+            var age = form.age.value;
+
+            if (nom && prenom && age) {
+                // Dynamically get the base URL (protocol + host + port)
+                var baseUrl = window.location.origin + "/CGI_bin/a.out";
+                var newUrl = `${baseUrl}?${encodeURIComponent(nom)}&${encodeURIComponent(prenom)}&${encodeURIComponent(age)}`;
+                window.location.href = newUrl;
+                return false; // Prevent the form from submitting in the traditional way
+            } else {
+                alert("Tous les champs doivent être remplis!");
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Formulaire d'information</h1>
+
+    <form id="infoForm" onsubmit="return validateForm()">
+        <label for="nom">Nom :</label><br>
+        <input type="text" id="nom" name="nom" required><br><br>
+
+        <label for="prenom">Prénom :</label><br>
+        <input type="text" id="prenom" name="prenom" required><br><br>
+
+        <label for="age">Âge :</label><br>
+        <input type="number" id="age" name="age" required><br><br>
+
+        <input type="submit" value="Envoyer">
+    </form>
+
+</body>
+</html>

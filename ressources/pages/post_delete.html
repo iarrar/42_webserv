@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+	
+	<h1>Testing post & delete methods</h1>
+	<!-- POST  -->
+	
+	<form action="/upload" method="post">
+		<label for="image">Choose an image:</label>
+		<input type="file" id="image" name="image" accept="image/jpeg, image/png, image/gif">
+		<br><br>
+		<input type="submit" value="Upload">
+	</form>
+	
+
+<!-- DELETE  -->
+<button onclick="deleteResource()">Delete Resource</button>
+
+<script>
+    function deleteResource() {
+        fetch('ressources/uploads/file.jpg', {
+            method: 'DELETE'
+        })
+        .then(response => response.text())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error:', error));
+    }
+</script>
+</body>
+</html>

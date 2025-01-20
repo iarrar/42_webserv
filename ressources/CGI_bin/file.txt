@@ -1,0 +1,15 @@
+Methods findeds
+Hello, World!
+Arguments passed to the script:
+value1=234r3r%60
+value2=ergerg
+
+total 360
+-rwxr-xr-x 1 artmarti 2022_perpignan   1875 Aug 19 10:29 Makefile
+-rw-r--r-- 1 artmarti 2022_perpignan      9 Aug 19 10:29 README.md
+-rw-r--r-- 1 artmarti 2022_perpignan    218 Aug 19 10:29 a_faire.txt
+-rw-r--r-- 1 artmarti 2022_perpignan   1406 Aug 19 10:29 info.cpp
+drwxr-xr-x 6 artmarti 2022_perpignan     94 Aug 19 12:28 network
+drwxr-xr-x 9 artmarti 2022_perpignan    127 Aug 19 10:29 ressources
+-rw-r--r-- 1 artmarti 2022_perpignan    188 Aug 19 10:29 sources.txt
+-rwxr-xr-x 1 artmarti 2022_perpignan 344104 Aug 19 12:28 webserv

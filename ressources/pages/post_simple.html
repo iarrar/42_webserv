@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File Upload</title>
+</head>
+<body>
+<h1>Upload a file</h1>
+<input type="file" id="fileInput">
+<button onclick="uploadFile()">Upload</button><br>
+<a id="downloadLink" style="display:none;" download>Download Uploaded File</a>
+
+<script>
+    function uploadFile() {
+        const fileInput = document.getElementById('fileInput');
+        const file = fileInput.files[0];
+        if (!file) {
+            alert('No file selected');
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const content = event.target.result;
+            fetch('/uploads/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': file.type, // Dynamic MIME type
+                    'Content-Length': content.byteLength,
+                    'X-File-Name': file.name  // Custom header for file name
+                },
+                body: content
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                // Create a download link for the uploaded file
+                const downloadLink = document.getElementById('downloadLink');
+                downloadLink.href = '/uploads/' + file.name; // Assuming file is served from /uploads/
+                downloadLink.style.display = 'inline';
+                downloadLink.textContent = 'Download ' + file.name;
+            })
+            .catch(error => console.error('Error:', error));
+        };
+        reader.readAsArrayBuffer(file); // Read file as binary
+    }
+</script>
+</body>
+</html>

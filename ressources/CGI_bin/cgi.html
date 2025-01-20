@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Launch Script</title>
+</head>
+<body>
+    <h1>Launch Shell Script</h1>
+
+    <!-- Form to input two values -->
+    <form id="scriptForm">
+        <label for="value1">Value 1:</label>
+        <input type="text" id="value1" name="value1" required>
+        <br><br>
+        <label for="value2">Value 2:</label>
+        <input type="text" id="value2" name="value2" required>
+        <br><br>
+        <button type="button" onclick="launchScript()">Run Script</button>
+    </form>
+
+    <script>
+        function launchScript() {
+            // Get the values from the form
+            const value1 = document.getElementById('value1').value;
+            const value2 = document.getElementById('value2').value;
+
+            // Prepare the data to be sent in the body
+            const formData = new URLSearchParams();
+            formData.append('value1', value1);
+            formData.append('value2', value2);
+
+            // Send the POST request with the form data
+            fetch('/CGI_bin/basic.sh', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .then(data => {
+                alert('Script executed successfully: ' + data);
+            })
+            .catch(error => {
+                alert('Error: ' + error);
+            });
+        }
+    </script>
+</body>
+</html>
